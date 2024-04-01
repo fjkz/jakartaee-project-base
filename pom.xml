@@ -20,6 +20,7 @@
         <wildfly.version>31.0.1.Final</wildfly.version>
         <checkstyle.version>10.15.0</checkstyle.version>
         <pmd.version>6.55.0</pmd.version>
+        <error-prone.version>2.26.1</error-prone.version>
         <compiler-plugin.version>3.13.0</compiler-plugin.version>
         <war-plugin.version>3.4.0</war-plugin.version>
         <wildfly-plugin.version>4.2.2.Final</wildfly-plugin.version>
@@ -48,7 +49,16 @@
                     <compilerArgs>
                         <arg>-Xlint:all</arg>
                         <arg>-Werror</arg> <!-- Stop compile with any warnings. -->
+                        <arg>-XDcompilePolicy=simple</arg>
+                        <arg>-Xplugin:ErrorProne</arg>
                     </compilerArgs>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>com.google.errorprone</groupId>
+                            <artifactId>error_prone_core</artifactId>
+                            <version>${error-prone.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
             <plugin>
