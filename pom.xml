@@ -15,14 +15,16 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.report.sourceEncoding>UTF-8</project.report.sourceEncoding>
-        <maven.compiler.release>17</maven.compiler.release>
+        <java.version>17</java.version>
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
         <wildfly.version>31.0.1.Final</wildfly.version>
         <checkstyle.version>10.15.0</checkstyle.version>
+        <pmd.version>6.55.0</pmd.version>
         <compiler-plugin.version>3.13.0</compiler-plugin.version>
         <war-plugin.version>3.4.0</war-plugin.version>
         <wildfly-plugin.version>4.2.2.Final</wildfly-plugin.version>
         <checkstyle-plugin.version>3.3.1</checkstyle-plugin.version>
+        <pmd-plugin.version>3.21.2</pmd-plugin.version>
     </properties>
 
     <dependencies>
@@ -42,6 +44,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${compiler-plugin.version}</version>
                 <configuration>
+                    <release>${java.version}</release>
                     <compilerArgs>
                         <arg>-Xlint:all</arg>
                         <arg>-Werror</arg> <!-- Stop compile with any warnings. -->
@@ -89,6 +92,46 @@
                     <execution>
                         <?m2e execute onConfiguration?>
                         <id>checkstyle</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>${pmd-plugin.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>net.sourceforge.pmd</groupId>
+                        <artifactId>pmd-core</artifactId>
+                        <version>${pmd.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>net.sourceforge.pmd</groupId>
+                        <artifactId>pmd-java</artifactId>
+                        <version>${pmd.version}</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <rulesets>
+                        <ruleset>${project.basedir}/config/pmd/pmd.xml</ruleset>
+                    </rulesets>
+                    <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
+                    <minimumTokens>200</minimumTokens>
+                    <targetJdk>${java.version}</targetJdk>
+                    <printFailingErrors>true</printFailingErrors>
+                    <linkXRef>false</linkXRef>
+                    <format>txt</format>
+                    <analysisCache>true</analysisCache>
+                </configuration>
+                <executions>
+                    <execution>
+                        <?m2e execute onConfiguration?>
+                        <id>pmd</id>
                         <phase>compile</phase>
                         <goals>
                             <goal>check</goal>
