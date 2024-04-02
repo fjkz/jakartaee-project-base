@@ -1,10 +1,9 @@
-package org.eclipse.jakarta.hello;
+package org.eclipse.jakarta;
 
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;
 
 /** A sample Jakarta EE application. */
-@ApplicationPath("rest")
-public class HelloApplication extends Application {
-    
+@ApplicationPath("/myapp/")
+public class MyApp extends Application {
 }

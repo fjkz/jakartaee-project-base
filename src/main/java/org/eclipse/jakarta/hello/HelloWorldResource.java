@@ -8,7 +8,7 @@ import jakarta.ws.rs.core.MediaType;
 import org.apache.commons.lang3.StringUtils;
 
 /** Hello API. */
-@Path("hello")
+@Path("api/hello")
 public class HelloWorldResource {
 
     /** Get hello with the given name. */
