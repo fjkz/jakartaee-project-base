@@ -5,6 +5,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
+import org.apache.commons.lang3.StringUtils;
 
 /** Hello API. */
 @Path("hello")
@@ -14,10 +15,6 @@ public class HelloWorldResource {
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     public Hello hello(@QueryParam("name") String name) {
-        if (name == null || name.trim().isEmpty())  {
-            name = "world";
-        }
-
-        return new Hello(name);
+        return new Hello(StringUtils.defaultIfBlank(name, "world"));
     }
 }
