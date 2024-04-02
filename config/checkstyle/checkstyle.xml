@@ -371,5 +371,9 @@
       <!-- The check is suppressed in the next line of code after the comment -->
       <property name="influenceFormat" value="1"/>
     </module>
+    <module name="IllegalImport">
+       <property name="illegalPkgs" value="lombok.experimental"/>
+       <property name="illegalClasses" value="lombok.var"/>
+    </module>
   </module>
 </module>
