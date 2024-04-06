@@ -22,6 +22,7 @@
         <wildfly.version>31.0.1.Final</wildfly.version>
         <lombok.version>1.18.32</lombok.version>
         <commons-lang.version>3.14.0</commons-lang.version>
+        <junit.version>5.10.2</junit.version>
 
         <!-- linters -->
         <checkstyle.version>10.15.0</checkstyle.version>
@@ -30,6 +31,7 @@
 
         <!-- plugins -->
         <compiler-plugin.version>3.13.0</compiler-plugin.version>
+        <surefire-plugin.version>3.2.5</surefire-plugin.version>
         <war-plugin.version>3.4.0</war-plugin.version>
         <wildfly-plugin.version>4.2.2.Final</wildfly-plugin.version>
         <checkstyle-plugin.version>3.3.1</checkstyle-plugin.version>
@@ -53,6 +55,12 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>${commons-lang.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -84,6 +92,10 @@
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire-plugin.version}</version>
             </plugin>
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
